@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useLayoutEffect, useRef } from 'react';
+import React, { useContext, useInsertionEffect, useRef } from 'react';
 import { STATIC_EXECUTION_CONTEXT } from '../constants';
 import GlobalStyle from '../models/GlobalStyle';
 import { useStyleSheet, useStylis } from '../models/StyleSheetManager';
@@ -59,7 +59,7 @@ export default function createGlobalStyle(
       // this conditional is fine because it is compiled away for the relevant builds during minification,
       // resulting in a single unguarded hook call
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      useLayoutEffect(() => {
+      useInsertionEffect(() => {
         if (!styleSheet.server) {
           renderStyles(instance, props, styleSheet, theme, stylis);
           return () => globalStyle.removeStyles(instance, styleSheet);
